@@ -1,0 +1,39 @@
+/* Import Google Font - Poppins */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+*{
+  /* margin: 0;
+  padding: 0; */
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+body{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-image: url(wallpaperflare.com_wallpaper.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 5px;
+}
+.container{
+    height: fit-content;
+    width: 35rem;
+    color: black;
+    box-sizing: border-box;
+    border: 2px solid white;
+    background-color: white;
+    border-radius: 10px;
+}
+header{
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: underline;
+  
+}
+
+.btn-light{
+  float: right;
+}
