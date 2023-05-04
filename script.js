@@ -19,24 +19,25 @@ function myFunc() {
       res.forEach((obj) => {
         document.getElementById("word").value = "";
 
-          audio = new Audio(obj.phonetics[0].audio);
-
-          volume.addEventListener("click", () => {
-            volume.style.color = "#4D59FB";
+          volume.addEventListener("click", ()=> {
+            audio = new Audio(obj.phonetics[0].audio);
             audio.play();
-            setTimeout(() => {
-              volume.style.color = "#999";
-            }, 5000);
           });
 
           obj.meanings.forEach((data) => {
             let database = [];
+            // let mean;
+            // console.log((data.definitions[0].definition))
             data.definitions.forEach((res) => {
-              let mean = res.definition;
-              // console.log(mean);
-              database.push(mean);
+              let mean = res.definition.split("");
 
-              document.getElementById("definition").innerHTML = `<b> Meaning</b> : ${database} <hr>`;
+              database.push(mean.join(""));
+              
+              // console.log(mean)
+              console.log(database[0])
+
+              // let definitions = obj[0].meanings[0].definitions[0];
+              // document.querySelector(".meaning span").innerText = data.definitions[0].definition; 
             });
           });
 
@@ -47,9 +48,8 @@ function myFunc() {
 
             document.getElementById(
               "meaning"
-            ).innerHTML = `<b> ${wordList.toUpperCase()}</b> [${speech}]`;
-            
-            console.log(speech);
+            ).innerHTML = `<b> ${wordList.toUpperCase()}</b> <br> ${speech} / ${obj.phonetics[1].text}`;
+            // console.log(speech);
           });
 
           obj.meanings.forEach((data) => {
@@ -58,11 +58,14 @@ function myFunc() {
               let example = res.example;
               exapmles.push(example);
 
-              document.getElementById("examples").innerHTML = `<b> Example</b> : ${exapmles} <hr>`;
+              if(exapmles == "" || exapmles == undefined){
+                document.getElementById("examples").innerHTML = "";
+              }else{
+              document.getElementById("examples").innerHTML = `<b> Example</b> : ${exapmles.slice(0,1)}`;
+              }
+
             });
           });
-
-        }
-      );
+        });
     });
 }
