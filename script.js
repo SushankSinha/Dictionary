@@ -1,5 +1,6 @@
 const container = document.querySelector(".container");
 let audio;
+let audio1;
 volume = container.querySelector(".audio button");
 
 function myFunc() {
@@ -16,41 +17,22 @@ function myFunc() {
   promise
     .then((data) => data.json())
     .then((res) => {
-      res.forEach((obj) => {
+      res.forEach((obj, word) => {
+
         document.getElementById("word").value = "";
 
           volume.addEventListener("click", ()=> {
             audio = new Audio(obj.phonetics[0].audio);
+            audio1 = new Audio(obj.phonetics[1].audio);
             audio.play();
+            audio1.play();
           });
 
-          obj.meanings.forEach((data) => {
-            let database = [];
-            // let mean;
-            // console.log((data.definitions[0].definition))
-            data.definitions.forEach((res) => {
-              let mean = res.definition.split("");
+          document.getElementById(
+            "meaning"
+          ).innerHTML = `<b> ${wordList.toUpperCase()}</b> <br> ${obj.meanings[0].partOfSpeech}/  ${obj.meanings[1].partOfSpeech}/ ${obj.phonetics[1].text}`;
 
-              database.push(mean.join(""));
-              
-              // console.log(mean)
-              console.log(database[0])
-
-              // let definitions = obj[0].meanings[0].definitions[0];
-              // document.querySelector(".meaning span").innerText = data.definitions[0].definition; 
-            });
-          });
-
-          obj.meanings.forEach((data) => {
-            let speech = [];
-            let res = data.partOfSpeech
-            speech.push(res)
-
-            document.getElementById(
-              "meaning"
-            ).innerHTML = `<b> ${wordList.toUpperCase()}</b> <br> ${speech} / ${obj.phonetics[1].text}`;
-            // console.log(speech);
-          });
+          document.getElementById("definition").innerHTML = `<b>Meaning</b> : ${(obj.meanings[0].definitions[0].definition)} <hr>`;
 
           obj.meanings.forEach((data) => {
             let exapmles = [];
@@ -68,4 +50,4 @@ function myFunc() {
           });
         });
     });
-}
+  }
