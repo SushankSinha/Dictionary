@@ -1,6 +1,7 @@
-const container = document.querySelector(".container");
 let audio;
 let audio1;
+const container = document.querySelector(".container");
+
 volume = container.querySelector(".audio button");
 
 function myFunc() {
@@ -17,29 +18,30 @@ function myFunc() {
   promise
     .then((data) => data.json())
     .then((res) => {
-      res.forEach((obj, word) => {
+      res.forEach((obj) => {
 
         document.getElementById("word").value = "";
 
-          volume.addEventListener("click", ()=> {
-            audio = new Audio(obj.phonetics[0].audio);
-            audio1 = new Audio(obj.phonetics[1].audio);
-            audio.play();
-            audio1.play();
-          });
+        console.log(obj.word)
 
+        audio = new Audio(obj.phonetics[0].audio);
+        audio1 = new Audio(obj.phonetics[1].audio);
+          volume.addEventListener("click", ()=> {
+            audio.play();
+            audio1.play();        
+          });
+        
+        
           document.getElementById(
             "meaning"
           ).innerHTML = `<b> ${wordList.toUpperCase()}</b> <br> ${obj.meanings[0].partOfSpeech}/  ${obj.meanings[1].partOfSpeech}/ ${obj.phonetics[1].text}`;
-
           document.getElementById("definition").innerHTML = `<b>Meaning</b> : ${(obj.meanings[0].definitions[0].definition)} <hr>`;
-
+          
           obj.meanings.forEach((data) => {
             let exapmles = [];
             data.definitions.forEach((res) => {
               let example = res.example;
               exapmles.push(example);
-
               if(exapmles == "" || exapmles == undefined){
                 document.getElementById("examples").innerHTML = "";
               }else{
