@@ -22,20 +22,21 @@ function myFunc() {
 
         document.getElementById("word").value = "";
 
-        console.log(obj.word)
+        let dictionary = obj;
+        let meaningOfWord = dictionary.meanings[0].definitions[0].definition;
+        console.log(dictionary);
+        let wordPartOfSpeech1 = dictionary.meanings[0].partOfSpeech;
 
-        audio = new Audio(obj.phonetics[0].audio);
-        audio1 = new Audio(obj.phonetics[1].audio);
+        let mp3 = obj.phonetics[0].audio;
           volume.addEventListener("click", ()=> {
-            audio.play();
-            audio1.play();        
-          });
-        
+            let audio = new Audio(mp3);
+            audio.play();      
+          })
         
           document.getElementById(
             "meaning"
-          ).innerHTML = `<b> ${wordList.toUpperCase()}</b> <br> ${obj.meanings[0].partOfSpeech}/  ${obj.meanings[1].partOfSpeech}/ ${obj.phonetics[1].text}`;
-          document.getElementById("definition").innerHTML = `<b>Meaning</b> : ${(obj.meanings[0].definitions[0].definition)} <hr>`;
+          ).innerHTML = `<b> ${wordList.toUpperCase()}</b> <br> ${wordPartOfSpeech1}`;
+          document.getElementById("definition").innerHTML = `<b>Meaning</b> ${meaningOfWord} <hr>`;
           
           obj.meanings.forEach((data) => {
             let exapmles = [];
